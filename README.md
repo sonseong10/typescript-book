@@ -1,64 +1,63 @@
 [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCGD_0i6L48hucTiiyhb5QzQ?style=social)](https://www.youtube.com/@basarat)
 
-TypeScript Deep Dive
+## 타입스크립트 심층 분석 (TypeScript Deep Dive)
 =======
 
-I've been looking at the issues that turn up commonly when people start using TypeScript. This is based on the lessons from [Stack Overflow](http://stackoverflow.com/tags/typescript/topusers) / [DefinitelyTyped](https://github.com/DefinitelyTyped/) and general engagement with the [TypeScript community](https://github.com/TypeStrong/). You can [follow for updates](https://twitter.com/basarat) and [don't forget to ★ on GitHub](https://github.com/basarat/typescript-book) 🌹
+저는 사람들이 TypeScript를 사용하기 시작할 때 일반적으로 나타나는 문제를 살펴봤습니다. 이는 다음의 교훈을 기반으로 합니다. [Stack Overflow](http://stackoverflow.com/tags/typescript/topusers) / [DefinitelyTyped](https://github.com/DefinitelyTyped/) 그리고 일반적인 참여[TypeScript community](https://github.com/TypeStrong/). 다음을 수행할 수 있습니다. [follow for updates](https://twitter.com/basarat) 그리고 [don't forget to ★ on GitHub](https://github.com/basarat/typescript-book) 🌹
 
 ## Reviews
 
-* Thanks for the wonderful book. Learned a lot from it. ([link](https://www.gitbook.com/book/basarat/typescript/discussions/21#comment-1468279131934))
-* Its probably the Best TypeScript book out there. Good Job ([link](https://twitter.com/thelondonjs/status/756419561570852864))
-* Love how precise and clear the examples and explanations are! ([link](https://twitter.com/joe_mighty/status/758290957280346112))
-* For the low, low price of free, you get pages of pure awesomeness. Chock full of source code examples and clear, concise explanations, TypeScript Deep Dive will help you learn TypeScript development. ([link](https://www.nativescript.org/blog/details/free-book-typescript-deep-dive))
-* Just a big thank you! **Best TypeScript 2 detailed explanation!** ([link](https://www.gitbook.com/book/basarat/typescript/discussions/38))
-* This gitbook got my project going pronto. Fluent easy read 5 stars. ([link](https://twitter.com/thebabellion/status/779888195559235584))
-* I recommend the online #typescript book by @basarat you'll love it.([link](https://twitter.com/markpieszak/status/788099306590969860))
-* I've always found this by @basarat really helpful. ([link](https://twitter.com/Brocco/status/789887640656945152))
-* We must highlight TypeScript Deep Dive, an open source book.([link](https://www.siliconrepublic.com/enterprise/typescript-programming-javascript))
-* Great online resource for learning. ([link](https://twitter.com/rdfuhr/status/790193307708076035))
-* Thank you for putting this book together, and for all your hard work within the TypeScript community. ([link](https://github.com/basarat/typescript-book/pull/183#issuecomment-257799713))
-* TypeScript Deep Dive is one of the best technical texts I've read in a while. ([link](https://twitter.com/borekb/status/794287092272599040))
-* Thanks @basarat for the TypeScript Deep Dive Book. Help me a lot with my first TypeScript project. ([link](https://twitter.com/betolinck/status/797901548562960384))
-* Thanks to @basarat for this great #typescript learning resource. ([link](https://twitter.com/markuse1501/status/799116176815230976))
-* Guyz excellent book on Typescript(@typescriptlang) by @basarat ([link](https://twitter.com/deeinlove/status/813245965507260417))
-* Leaning on the legendary @basarat's "TypeScript Deep Dive" book heavily at the moment ([link](https://twitter.com/sitapati/status/814379404956532737))
-* numTimesPointedPeopleToBasaratsTypeScriptBook++; ([link](https://twitter.com/brocco/status/814227741696462848))
-* A book not only for typescript, a good one for deeper JavaScript knowledge as well. [link](https://www.gitbook.com/book/basarat/typescript/discussions/59)
-* In my new job, we're using @typescriptlang, which I am new to. This is insanely helpful huge thanks, @basarat! [link](https://twitter.com/netchkin/status/855339390566096896)
-* Thank you for writing TypeScript Deep Dive. I have learned so much. [link](https://twitter.com/buctwbzs/status/857198618704355328?refsrc=email&s=11)
-* Loving @basarat's @typescriptlang online book basarat.gitbooks.io/typescript/# loaded with great recipes! [link](https://twitter.com/ericliprandi/status/857608837309677568)
-* Microsoft doc is great already, but if want to "dig deeper" into TypeScript I find this book of great value  [link](https://twitter.com/caludio/status/876729910550831104)
-* Thanks, this is a great book 🤓🤓 [link](https://twitter.com/jjwonmin/status/885666375548547073)
-* Deep dive to typescript is awesome in so many levels. i find it very insightful. Thanks [link](https://twitter.com/orenmizr/status/891083492787970053)
-* @basarat's intro to @typescriptlang is still one of the best going (if not THE best) [link](https://twitter.com/stevealee/status/953953255968698368)
-* 
-* This is sweet! So many #typescript goodies! [link](https://twitter.com/pauliescanlon/status/989898852474998784)
+* 멋진 책에 감사드립니다. 많은 것을 배웠습니다. ([link](https://www.gitbook.com/book/basarat/typescript/discussions/21#comment-1468279131934))
+* 아마도 현존하는 최고의 타입스크립트 책일 것입니다. Good Job ([link](https://twitter.com/thelondonjs/status/756419561570852864))
+* 예제와 설명이 얼마나 정확하고 명료한지 마음에 듭니다! ([link](https://twitter.com/joe_mighty/status/758290957280346112))
+* 무료라는 저렴한 가격에 멋진 페이지가 가득합니다. 소스 코드 예제와 명확하고 간결한 설명으로 가득 찬 TypeScript 심층 분석은 TypeScript 개발을 배우는 데 도움이 될 것입니다. ([link](https://www.nativescript.org/blog/details/free-book-typescript-deep-dive))
+* 정말 감사합니다! **최고의 타입스크립트 2 상세 설명!** ([link](https://www.gitbook.com/book/basarat/typescript/discussions/38))
+* 이 깃북 덕분에 프로젝트를 바로 시작할 수 있었어요. 유창하고 읽기 쉬움 별 5개. ([link](https://twitter.com/thebabellion/status/779888195559235584))
+* 베이사라트(@basarat)의 온라인 #타입스크립트 책을 추천합니다.([link](https://twitter.com/markpieszak/status/788099306590969860))
+* 저는 항상 @basarat의 이 글이 정말 도움이 된다고 생각했습니다. ([link](https://twitter.com/Brocco/status/789887640656945152))
+* 오픈 소스 서적인 TypeScript 딥 다이브를 주목해야 합니다.([link](https://www.siliconrepublic.com/enterprise/typescript-programming-javascript))
+* 학습을 위한 훌륭한 온라인 리소스입니다.([link](https://twitter.com/rdfuhr/status/790193307708076035))
+* 이 책을 준비해 주신 여러분과 TypeScript 커뮤니티의 모든 노력에 감사드립니다. ([link](https://github.com/basarat/typescript-book/pull/183#issuecomment-257799713))
+* TypeScript 심층 분석은 제가 최근에 읽은 최고의 기술 문서 중 하나입니다. ([link](https://twitter.com/borekb/status/794287092272599040))
+* TypeScript 딥 다이브 북을 제공해 주신 @basarat에게 감사드립니다. 첫 번째 TypeScript 프로젝트에 많은 도움이 되었습니다. ([link](https://twitter.com/betolinck/status/797901548562960384))
+* 이 훌륭한 #타입스크립트 학습 리소스를 제공해 주신 @basarat에게 감사드립니다.([link](https://twitter.com/markuse1501/status/799116176815230976))
+* 베이사라트(@basarat)의 타입스크립트(@typescriptlang)에 관한 훌륭한 책 ([link](https://twitter.com/deeinlove/status/813245965507260417))
+* 현재 전설적인 @basarat의 "TypeScript Deep Dive" 책에 크게 의존하고 있습니다. ([link](https://twitter.com/sitapati/status/814379404956532737))
+* numTimes는 사람들을 베이사라트 타입스크립트북++로 안내했습니다.; ([link](https://twitter.com/brocco/status/814227741696462848))
+* 타입스크립트뿐만 아니라 자바스크립트에 대한 심도 있는 지식을 쌓기에도 좋은 책입니다.[link](https://www.gitbook.com/book/basarat/typescript/discussions/59)
+* 새 직장에서는 @typescriptlang을 사용하고 있는데, 저는 처음 사용해요. 정말 큰 도움이 되었습니다, @basarat![link](https://twitter.com/netchkin/status/855339390566096896)
+* TypeScript 딥 다이브를 작성해 주셔서 감사합니다. 정말 많은 것을 배웠습니다. [link](https://twitter.com/buctwbzs/status/857198618704355328?refsrc=email&s=11)
+* 훌륭한 레시피가 가득한 @basarat의 @typescriptlang 온라인 서적 basarat.gitbooks.io/typescript/#을 사랑합니다! [link](https://twitter.com/ericliprandi/status/857608837309677568)
+* Microsoft 문서는 이미 훌륭하지만 TypeScript에 대해 "더 깊이 파고들고" 싶다면 이 책이 큰 도움이 될 것입니다.  [link](https://twitter.com/caludio/status/876729910550831104)
+* 고마워요, 좋은 책이에요 🤓🤓 [link](https://twitter.com/jjwonmin/status/885666375548547073)
+* 타이포그래피에 대한 심층 분석은 여러 수준에서 훌륭합니다. 매우 통찰력이 있습니다. 감사 [link](https://twitter.com/orenmizr/status/891083492787970053)
+* 바사라트(@basarat)의 @typescriptlang 소개는 여전히 최고 중 하나입니다(최고는 아니더라도). [link](https://twitter.com/stevealee/status/953953255968698368)
+* 정말 달콤합니다! 타입스크립트 상품이 너무 많아요! [link](https://twitter.com/pauliescanlon/status/989898852474998784)
 
-## Get Started
-If you are here to read the book online [get started](https://basarat.gitbook.io/typescript/getting-started).
+## 시작하기
+온라인으로 책을 읽으시려면 [get started](https://basarat.gitbook.io/typescript/getting-started).
 
 ## Translations 
-Book is completely free so you can copy paste whatever you want without requiring permission. If you have a translation you want me to link here. [Send a PR](https://github.com/basarat/typescript-book/edit/master/README.md).
-* [Filipino](https://github.com/themarshann/typescript-book-fil)
-* [Italian](https://github.com/TizioFittizio/typescript-book)
-* [Chinese](https://github.com/jkchao/typescript-book-chinese)
-* [Russian](https://github.com/etroynov/typescript-book)
-* [Portuguese](https://github.com/overlineink/typescript-book)
-* [Japanese](https://github.com/yohamta/typescript-book)
-* [Spanish](https://github.com/melissarofman/typescript-book)
-* [Korean](https://github.com/radlohead/typescript-book)
-* [French](https://github.com/HachemiH/typescript-book)
-* [Polish](https://github.com/mbiesiad/typescript-book/tree/pl_PL)
-* [Thai](https://github.com/futurouz/typescript-book)
-* [Bengali](https://github.com/Acesif/typescript-book)
-* [Ukrainian](https://github.com/ArtfulBits/typescript-book)
+이 책은 완전 무료이므로 허락 없이 원하는 내용을 복사하여 붙여넣기할 수 있습니다. 번역본이 있다면 여기에 링크해 주세요. [Send a PR](https://github.com/basarat/typescript-book/edit/master/README.md).
+* [필리핀](https://github.com/themarshann/typescript-book-fil)
+* [이탈리아](https://github.com/TizioFittizio/typescript-book)
+* [중국](https://github.com/jkchao/typescript-book-chinese)
+* [러시아](https://github.com/etroynov/typescript-book)
+* [포르투갈](https://github.com/overlineink/typescript-book)
+* [일본](https://github.com/yohamta/typescript-book)
+* [스페인](https://github.com/melissarofman/typescript-book)
+* [한국](https://github.com/radlohead/typescript-book)
+* [프랑스](https://github.com/HachemiH/typescript-book)
+* [폴란드](https://github.com/mbiesiad/typescript-book/tree/pl_PL)
+* [태국](https://github.com/futurouz/typescript-book)
+* [벵골](https://github.com/Acesif/typescript-book)
+* [우크라이나](https://github.com/ArtfulBits/typescript-book)
 
-## Other Options
-You can also download one of the Epub, Mobi, or PDF formats from the [actions tab](https://github.com/basarat/typescript-book/actions) by clicking on the latest build run. You will find the files in the artifacts section.
+## 기타 옵션 (Other Options)
+최신 빌드 실행을 클릭하여 [actions tab](https://github.com/basarat/typescript-book/actions)에서 Epub, Mobi 또는 PDF 형식 중 하나를 다운로드할 수도 있습니다. 파일은 아티팩트 섹션에서 찾을 수 있습니다.
 
-## Special Thanks
-All the amazing [contributors](https://github.com/basarat/typescript-book/graphs/contributors) 🌹
+## 특별한 감사 (Special Thanks)
+모든 놀라운 [contributors](https://github.com/basarat/typescript-book/graphs/contributors) 🌹
 
-## Share
-Share URL: https://basarat.gitbook.io/typescript/
+## 공유 (Share)
+URL 공유: https://basarat.gitbook.io/typescript/
