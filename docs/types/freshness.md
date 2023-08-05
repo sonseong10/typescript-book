@@ -1,101 +1,100 @@
+- [신선도(Freshness)](#freshness)
+- [추가 속성 허용](#추가-속성-허용)
+- [사용 사례: React State](#사용-사례-react-state)
 
-* [Freshness](#freshness)
-* [Allowing extra properties](#allowing-extra-properties)
-* [Use Case: React](#use-case-react-state)
+## 신선도(Freshness)
 
-## Freshness
+TypeScipt는 구조적으로 타입 호환성이 있는 객체 리터럴의 타입 검사를 쉽게 할 수 있도록 **신선도(Freshness)**라는 개념을 제공합니다(다른 말로 *엄격한 객체 리터럴 검사*라 하기도 함).
 
-TypeScript provides a concept of **Freshness** (also called *strict object literal checking*) to make it easier to type check object literals that would otherwise be structurally type compatible.
-
-Structural typing is *extremely convenient*. Consider the following piece of code. This allows you to *very conveniently* upgrade your JavaScript to TypeScript while still preserving a level of type safety:
+구조적 타입 처리는 *매우 편리*합니다. 다음의 코드를 보세요. 이렇게 하면 JavaScript 코드를 TypeScript로 _아주 쉽게_ 업그레이드할 수 있고 적정 수준의 타입 안정성이 유지됩니다:
 
 ```ts
 function logName(something: { name: string }) {
-    console.log(something.name);
+  console.log(something.name);
 }
 
-var person = { name: 'matt', job: 'being awesome' };
-var animal = { name: 'cow', diet: 'vegan, but has milk of own species' };
+var person = { name: "matt", job: "being awesome" };
+var animal = { name: "cow", diet: "vegan, but has milk of own species" };
 var random = { note: `I don't have a name property` };
 
-logName(person); // okay
-logName(animal); // okay
-logName(random); // Error: property `name` is missing
+logName(person); // 오케이
+logName(animal); // 오케이
+logName(random); // 오류: 속성 `name` 누락
 ```
 
-However, *structural* typing has a weakness in that it allows you to misleadingly think that something accepts more data than it actually does. This is demonstrated in the following code which TypeScript will error on as shown:
+그렇지만, _구조적_ 타입 처리는 무언가가 실제 다루는 것보다 더 많은 데이터를 받아들인다는 오해를 불러일으킬 수 있다는 약점이 있습니다. 이런 경우는 아래 코드에서 TypeScript가 발생시키는 오류와 함께 확인할 수 있습니다:
 
 ```ts
 function logName(something: { name: string }) {
-    console.log(something.name);
+  console.log(something.name);
 }
 
-logName({ name: 'matt' }); // okay
-logName({ name: 'matt', job: 'being awesome' }); // Error: object literals must only specify known properties. `job` is excessive here.
+logName({ name: "matt" }); // 오케이
+logName({ name: "matt", job: "being awesome" }); // 오류: 객체 리터럴은 정의된 속성만 지정해야 함. 여기서 `job`은 불필요.
 ```
 
-Note that this error *only happens on object literals*. Without this error one might look at the call `logName({ name: 'matt', job: 'being awesome' })` and think that *logName* would do something useful with `job` where as in reality it will completely ignore it.
+이 오류는 *객체 리터럴을 사용한 경우에만" 발생한다는 점을 유념해주세요. 이렇게 오류가 발생하지 않는다면 `logName({ name: 'matt', job: 'being awesome' })`라는 코드를 보는 사람은 *logName\*이 `job`에 대해서도 뭔가 처리할 것이라고 오해할 수 있습니다, 실제로는 아무것도 하지 않는데도요.
 
-Another big use case is with interfaces that have optional members, without such object literal checking, a typo would type check just fine. This is demonstrated below:
+또 다른 큰 사용 예는 선택적(optional) 멤버가 있는 인터페이스의 경우이며, 앞서 설명한 객체 리터럴 검사가 없다면 오타가 있어도 타입 검사가 그냥 통과될 것 입니다. 아레에 나와 있습니다:
 
 ```ts
 function logIfHasName(something: { name?: string }) {
-    if (something.name) {
-        console.log(something.name);
-    }
+  if (something.name) {
+    console.log(something.name);
+  }
 }
-var person = { name: 'matt', job: 'being awesome' };
-var animal = { name: 'cow', diet: 'vegan, but has milk of own species' };
+var person = { name: "matt", job: "being awesome" };
+var animal = { name: "cow", diet: "vegan, but has milk of own species" };
 
-logIfHasName(person); // okay
-logIfHasName(animal); // okay
-logIfHasName({neme: 'I just misspelled name to neme'}); // Error: object literals must only specify known properties. `neme` is excessive here.
+logIfHasName(person); // 오케이
+logIfHasName(animal); // 오케이
+logIfHasName({ neme: "I just misspelled name to neme" }); // 오류: 객체 리터럴은 정의된 속성만 지정해야 함. 여기서 `neme`은 불필요.
 ```
 
-The reason why only object literals are type checked this way is because in this case additional properties *that aren't actually used* is almost always a typo or a misunderstanding of the API.
+객체 리터럴일 때만 이런 식의 타입 검사가 수행되는 이유는 속성이 추가로 입력되었지만 그 속성이 "실제로 사용되지 않는다면" 거의 항상 오타가 발생한 경우이거나 API를 잘못 이해한 경우이기 때문입니다.
 
-### Allowing extra properties
+### 추가 속성 허용
 
-A type can include an index signature to explicitly indicate that excess properties are permitted:
+타입 선언에 인덱스 서명을 포함시키면 그 타입이 추가 속성을 허용함을 명시적으로 나타낼 수 있습니다.:
 
 ```ts
-var x: { foo: number, [x: string]: unknown };
-x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
+var x: { foo: number; [x: string]: unknown };
+x = { foo: 1, baz: 2 }; // 오케이, `baz`는 인덱스 서명 부분에 해당하게 됨
 ```
 
-### Use Case: React State
+### 사용 사례: React State
 
-[Facebook ReactJS](https://facebook.github.io/react/) offers a nice use case for object freshness. Quite commonly in a component you call `setState` with only a few properties instead of passing in all the properties, i.e.: 
+[Facebook ReactJS](https://facebook.github.io/react/)에서 객체 신선도의 좋은 사용 사례를 볼 수 있습니다. 컴포넌트에서 `setState`를 호출할 때 일부 속성만 넣는 경우가 아주 흔합니다, 예를 들면:
 
 ```ts
-// Assuming
+// 아래와 같을 때
 interface State {
-    foo: string;
-    bar: string;
+  foo: string;
+  bar: string;
 }
 
-// You want to do: 
-this.setState({foo: "Hello"}); // Error: missing property bar
+// 하려고 한 것:
+this.setState({ foo: "Hello" }); // 오류: 속성 bar 누락
 
-// But because state contains both `foo` and `bar` TypeScript would force you to do: 
-this.setState({foo: "Hello", bar: this.state.bar});
+// State에 `foo`와 `bar` 둘 다 있기 때문에 TypeScript에서는 이렇게 할 수 밖에 없음:
+this.setState({ foo: "Hello", bar: this.state.bar });
 ```
 
-Using the idea of freshness you would mark all the members as optional and *you still get to catch typos*!: 
+신신도 개념을 생각해서 모든 멤버를 선택적(optional)로 표시하면 일부 속성만 넣으면서도 _오타를 검출할 수 있습니다_!:
 
 ```ts
-// Assuming
+// 아래와 같을 때
 interface State {
-    foo?: string;
-    bar?: string;
+  foo?: string;
+  bar?: string;
 }
 
-// You want to do: 
-this.setState({foo: "Hello"}); // Yay works fine!
+// 하려고 한 것:
+this.setState({ foo: "Hello" }); // 좋아, 잘 되는군!
 
-// Because of freshness it's protected against typos as well!
-this.setState({foos: "Hello"}); // Error: Objects may only specify known properties
+// 신선도 때문에 오타 입력은 방지됨!
+this.setState({ foos: "Hello" }); // 오류: 객체 리터럴은 정의된 속성만 지정해야 함
 
-// And still type checked
-this.setState({foo: 123}); // Error: Cannot assign number to a string
+// 타입 검사도 유지됨
+this.setState({ foo: 123 }); // 오류: 문자열에 숫자를 할당할 수 없음
 ```

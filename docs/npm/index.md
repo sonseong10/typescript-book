@@ -1,43 +1,43 @@
 # NPM 
 
-> Fun fact `npm` is [not an acronym](https://twitter.com/npmjs/status/347057301401763840) so it doesn't expand to anything, but among friends it is commonly called `node package manager`.
+> 재미있는 사실 `npm`은 [not an acronym](https://twitter.com/npmjs/status/347057301401763840)로 확장되지는 않지만, 친구들 사이에서는 흔히 '노드 패키지 관리자'라고 불립니다.
 
-`npm` is a binary that comes with default `node` installations used to manage community shared JavaScript / TypeScript packages.
+`npm` 는 커뮤니티 공유 자바스크립트/타입스크립트 패키지를 관리하는 데 사용되는 기본 `node` 설치와 함께 제공되는 바이너리입니다.
 
 
-* NPM packages are hosted at (and installed from) https://www.npmjs.com/ (the ☁️).
+* NPM 패키지는 다음 위치에서 호스팅되고 설치됩니다 https://www.npmjs.com/ (the ☁️).
 
-## Quick common setup
+## 빠른 공통 설정(Quick common setup)
 
-* npm packages are configured using `package.json` file. You can generate a quick file using `npm init -y`.
-* packages get installed into a `./node_modules` folder. You normally have this folder in your `.gitignore`.
+* npm 패키지는 `package.json` 파일을 사용하여 구성합니다. `npm init -y`를 사용하여 빠른 파일을 생성할 수 있습니다.
+* 패키지는 `./node_modules` 폴더에 설치됩니다. 일반적으로 이 폴더는 `.gitignore`에 있습니다.
 
-> Even though you might be building an application, having a `package.json` essentially makes your project a package as well. So the terms your `project | package` can be used interchangeably.
+> 애플리케이션을 빌드하고 있더라도 `package.json`이 있으면 기본적으로 프로젝트도 패키지가 됩니다. 따라서 '프로젝트 | 패키지'라는 용어는 서로 바꿔서 사용할 수 있습니다.
 
-When you checkout someone's (your team's) package, it will have a `package.json` that will list the dependencies you need to run the project. You simply run `npm install` and npm will bring them down from the cloud ☁️.
+다른 사람(팀)의 패키지를 체크아웃하면 프로젝트를 실행하는 데 필요한 종속성을 나열하는 `package.json`이 있습니다. `npm install`을 실행하기만 하면 npm이 클라우드에서 해당 종속성을 가져옵니다. ☁️.
  
-## Installing a package
-You can run `npm install <something>`. Most people will use the shorthand `npm i <something>` e.g. 
+## 패키지 설치(Installing a package)
+당신은 `npm install <something>` 동작을 진행 할 수 있습니다. 대부분의 사람들은 속기 `npm i <something>`을 사용합니다. 예: 
 
 ```ts
 // Install react
 npm i react
 ```
 
-> This will also automatically add `react` into your `package.json`'s `dependencies`.
+> 이렇게 하면 `package.json`의 `종속성`에 `react`가 자동으로 추가됩니다.
 
-## Installing a devDependency
-`devDependencies` are dependencies that are only required during *development* if your project and not required after deployment. 
+## 개발자 종속성 설치(Installing a devDependency)
+`개발 종속성`은 프로젝트의 *개발* 중에만 필요하고 배포 후에는 필요하지 않은 종속성입니다.  
 
-`typescript` is common in `devDependencies` as its only required to build `.ts -> .js`. You normally deploy the built `.js` files:
+`typescript`는 `.ts -> .js`를 빌드할 때만 필요하기 때문에 `devDependencies`에서 흔히 볼 수 있습니다. 일반적으로 빌드된 `.js` 파일을 배포합니다:
 
-* into production  
-* OR for consumption by other other npm packages
+* 프로덕션에 적용  
+* 또는 다른 npm 패키지에서 사용하는 경우
 
-## Security
-The public `npm` packages are scanned by security team worldwide and issues get reported to npm team. They then release security advisories detailing the issue and potential fixes. Commonly the fix is simply updating the package. 
+## 보안(Security)
+전 세계 보안 팀에서 공개 `npm` 패키지를 검사하고 문제가 발견되면 npm 팀에 보고합니다. 그런 다음 문제와 잠재적 수정 사항을 자세히 설명하는 보안 권고를 발표합니다. 일반적으로 수정은 단순히 패키지를 업데이트하는 것입니다.
 
-You can run an audit on your node project by simply running `npm audit`. This will highlight any vulnerabilities that might exist in the package / dependencies of the package. e.g. 
+노드 프로젝트에 대한 감사는 간단히 `npm audit`를 실행하여 실행할 수 있습니다. 이렇게 하면 패키지의 패키지/종속성에 존재할 수 있는 모든 취약점을 강조 표시합니다. 예:
 
 ```
 ┌───────────────┬──────────────────────────────────────────────────────────────┐
@@ -53,14 +53,15 @@ You can run an audit on your node project by simply running `npm audit`. This wi
 └───────────────┴──────────────────────────────────────────────────────────────┘
 ```
 
-Note that commonly the issues are found in *development* dependencies (e.g. jest in this case). Since these aren't are a part of your production deployments, most likely your production application is not vulnerable. But still good practice to keep vulnerabilities to `0`.
+일반적으로 이러한 문제는 *개발* 종속성(예: 이 경우 `jest`)에서 발견된다는 점에 유의하세요. 이러한 종속성은 프로덕션 배포의 일부가 아니므로 프로덕션 애플리케이션이 취약하지 않을 가능성이 높습니다. 하지만 여전히 취약성을 '0'으로 유지하는 것이 좋습니다.
 
-Simply add `npm audit` (the command exist with error code `1` in case of error) as a part of your deployment to ensure the projects stay up to date.
+프로젝트가 최신 상태로 유지되도록 배포의 일부로 `npm audit`(오류 발생 시 오류 코드 `1`이 있는 명령어)를 추가하기만 하면 됩니다.
 
 ## NPM Scripts 
 
-### What is with `--` in scripts 
-You can build a base script with a limited set of command line arguments e.g. here is a script target that runs `tsc` for the TypeScript compiler: 
+### 스크립트에서 `--'는 무엇인가요?
+
+제한된 명령줄 인수 집합으로 기본 스크립트를 빌드할 수 있습니다(예: 다음은 TypeScript 컴파일러에서 `tsc`를 실행하는 스크립트 
 
 ```json
 {
@@ -70,7 +71,7 @@ You can build a base script with a limited set of command line arguments e.g. he
 }
 ```
 
-You can create a `build:watch` target to run `tsc -p . -w` or alternatively asking npm to run `build` with the additional `-w` flag like so: 
+빌드:워치` 타깃을 생성하여 `tsc -p .`-w` 또는 다음과 같이  플래그를 추가하여 `build`를 실행하도록 npm에 요청할 수 있습니다:
 
 ```json
 {
@@ -80,7 +81,7 @@ You can create a `build:watch` target to run `tsc -p . -w` or alternatively aski
   }
 }
 ```
-You can pass in as many flags as you want after `--` e.g. in the following example `build:more` has the same effect as `something --foo -f -d --bar`
+예를 들어, 다음 예제에서 `build:more`는 `something --foo -f -d --bar`와 동일한 효과를 갖습니다.
 
 ```json
 {
@@ -92,20 +93,21 @@ You can pass in as many flags as you want after `--` e.g. in the following examp
 ```
 
 ## Public vs. Private packages
-You don't need this when *using* any of the common public npm packages. Just know its there for enterprise / commercial customers.
+
+일반적인 공개 npm 패키지를 *사용*할 때는 이 옵션이 필요하지 않습니다. 엔터프라이즈/상업 고객을 위한 것만 알아두세요.
 
 ### Public packages
-* Packages are public by default. 
-* Anyone can deploy a package to npm. 
-* You just need an account (which you can get for free).
+* 패키지는 기본적으로 공개되어 있습니다. 
+* 누구나 npm에 패키지를 배포할 수 있습니다. 
+* 계정만 있으면 됩니다(무료로 받을 수 있음).
  
-No one needs an account to download a public package. 
+공개 패키지를 다운로드하는 데 계정이 필요하지 않습니다.
 
-This free sharing of packages is one of the key reasons of success for npm 🌹.
+이러한 무료 패키지 공유는 npm의 주요 성공 요인 중 하나입니다. 🌹
 
 ### Private packages 
 
-If you want a private package for your company / team / enterprise you need to sign up to a paid plan, details here : https://www.npmjs.com/pricing
+회사/팀/기업을 위한 비공개 패키지를 이용하려면 유료 요금제에 가입해야 하며, 자세한 내용은 https://www.npmjs.com/pricing 에서 확인하세요.
 
-Of-course you need an account with the right permissions to download a private package.
+물론 비공개 패키지를 다운로드하려면 적절한 권한이 있는 계정이 필요합니다.
  

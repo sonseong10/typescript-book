@@ -1,116 +1,115 @@
-## Type Assertion
-TypeScript allows you to override its inferred and analyzed view of types in any way you want to. This is done by a mechanism called "type assertion". TypeScript's type assertion is purely you telling the compiler that you know about the types better than it does, and that it should not second guess you.
+## 타입 표명(Type Assertion)
 
-A common use case for type assertion is when you are porting over code from JavaScript to TypeScript. For example consider the following pattern:
+TypeScript에서는 시스템이 추론 및 분석한 타입 내용을 우리가 원하는 대로 얼마든지 바꿀 수 있습니다. 이때 "타입 표명(type assertion)"이라 불리는 메커니즘이 사용됩니다. TypeScript의 타입 표명은 프로그래머가 컴파일러에게 내가 너보다 타입에 더 잘 알고 있고, 나의 주장에 대해 의심하지 말라고 하는 것과 같습니다.
+
+타입 표명은 JavaScript 코드를 TypeScript으로 포팅할 때 많이 쓰입니다. 예를 들어 다음과 형태를 보세요:
 
 ```ts
 var foo = {};
-foo.bar = 123; // Error: property 'bar' does not exist on `{}`
-foo.bas = 'hello'; // Error: property 'bas' does not exist on `{}`
+foo.bar = 123; // 오류: 속성 'bar'가 `{}`에 존재하지 않음
+foo.bas = "hello"; // 오류: 속성 'bar'가 `{}`에 존재하지 않음
 ```
 
-Here the code errors because the *inferred* type of `foo` is `{}` i.e. an object with zero properties. Therefore you are not allowed to add `bar` or `bas` to it. You can fix this simply by a type assertion `as Foo`:
+위 코드는 에러를 발생시키는데 그 이유는 `foo`가 `{}`, 즉 속성이 하나도 없는 빈 객체로 타입 추론이 되었기 때문입니다. 그러므로 `bar`나 `bas`같은 속성을 `foo`에 추가할 수 없는 것입니다. 이런 문제는 `as Foo`라는 타입 표명을 사용해서 간단히 해결할 수 있습니다:
 
 ```ts
 interface Foo {
-    bar: number;
-    bas: string;
+  bar: number;
+  bas: string;
 }
 var foo = {} as Foo;
 foo.bar = 123;
-foo.bas = 'hello';
+foo.bas = "hello";
 ```
 
 ### `as foo` vs. `<foo>`
-Originally the syntax that was added was `<foo>`. This is demonstrated below:
+
+원래 타입 표명으로 추가되었던 구문은 `<foo>`와 같은 꺽쇠였습니다. 아래에 나와 있듯이:
 
 ```ts
 var foo: any;
-var bar = <string> foo; // bar is now of type "string"
+var bar = <string>foo; // 이제 bar의 타입은 "문자열"입니다
 ```
 
-However, there is an ambiguity in the language grammar when using `<foo>` style assertions in JSX:
+그러나 꺽쇠 스타일(`<foo>`)의 구문을 사용하면 JSX에서 문법적으로 모호한 경우가 발생했습니다:
 
 ```ts
-var foo = <string>bar;
-</string>
+var foo = <string>bar;</string>;
 ```
 
-Therefore it is now recommended that you just use `as foo` for consistency.
+그래서 현재는 일관성을 위해 `as foo`와 같은 형식으로 타입 표명을 사용하는 것이 권장됩니다.
 
-### Type Assertion vs. Casting
-The reason why it's not called "type casting" is that *casting* generally implies some sort of runtime support. However, *type assertions* are purely a compile time construct and a way for you to provide hints to the compiler on how you want your code to be analyzed.
+### 타입 표명 vs. 캐스팅(Casting)
 
-### Assertion considered harmful
-In many cases assertion will allow you to easily migrate legacy code (and even copy paste other code samples into your codebase). However, you should be careful with your use of assertions. Take our original code as a sample, the compiler will not protect you from forgetting to *actually add the properties you promised*:
+타입 표명을 "타입 캐스팅(type casting)"이라 부르지 않는 이유는 일반적으로 *캐스팅*이란 말은 실행 시간에 어떤 동작이 일어날 것임을 내포하기 때문입니다. 하지만 "타입 표명(type assertions)"은 순수하게 컴파일 시간 구성물이고 당신의 코드가 어떤 식으로 분석되길 원하는지 컴파일러에게 힌트를 제공하는 수단입니다.
+
+### 타입 표명은 해롭댜고 간주됨
+
+많은 경우 타입 표명을 사용하면 레거시 코드를 마이그레이션할 때 (심지어 다른 코드 샘플을 복사해서 내 코드베이스로 붙여넣을 때) 쉽게 넘어갈 수 있습니다. 그렇지만 타입 표명은 조심해서 사용해야 합니다. 우리의 원래 코드를 예로 삼아서, 컴파일러는 당신이 깜빡해서 "약속한 속성을 추가하지 않은 경우"에도 당신을 보호해주지 않습니다:
 
 ```ts
 interface Foo {
-    bar: number;
-    bas: string;
+  bar: number;
+  bas: string;
 }
 var foo = {} as Foo;
-// ahhhh .... forget something?
+// 아.. 뭐 잊은 거 없나요?
 ```
 
-Also another common thought is using an assertion as a means of providing *autocomplete* e.g.:
+그리고 타입 표명을 *자동 완성*을 얻는 수단으로만 여기는 통념도 있습니다. 예를 들면:
 
 ```ts
 interface Foo {
-    bar: number;
-    bas: string;
+  bar: number;
+  bas: string;
 }
 var foo = <Foo>{
-    // the compiler will provide autocomplete for properties of Foo
-    // But it is easy for the developer to forget adding all the properties
-    // Also this code is likely to break if Foo gets refactored (e.g. a new property added)
+  // 컴파일러는 Foo의 속성에 대해 자동완성으로 지원할 것입니다.
+  // 하지만 이렇게 하면 개발자가 속성을 추가하는 일을 깜빡하기도 쉽습니다.
+  // 또, Foo가 리팩토링(예: 새 속성 추가)되면 바로 망가질 것습니다.
 };
 ```
 
-but the hazard here is the same, if you forget a property the compiler will not complain. It is better if you do the following:
+이 경우에도 위험은 동일하며, 속성을 추가하는 것을 깜빡해도 컴파일러가 불평하지 않습니다. 아래와 같이 하는 것이 좋습니다.:
 
 ```ts
 interface Foo {
-    bar: number;
-    bas: string;
+  bar: number;
+  bas: string;
 }
 var foo: Foo = {
-    // the compiler will provide autocomplete for properties of Foo
+  // 컴파일러가 Foo의 속성에 대해 자동완성을 지원할 것입니다
 };
 ```
 
-In some cases you might need to create a temporary variable, but at least you will not be making (possibly false) promises and instead relying on the type inference to do the checking for you.
+이렇게 하다 보면 임시 변수를 추가해야 경우도 생기겠지만, 당신이 (아마도 지키지 못할) 약속을 남발하는 일은 없을 것이고 자동으로 타입을 확인해주는 타입 추론 시스템을 활용할 수 있게 될 것입니다.
 
-### Double assertion
-The type assertion, despite being a bit unsafe as we've shown, is not *completely open season*. E.g. the following is a very valid use case (e.g. the user thinks the event passed in will be a more specific case of an event) and the type assertion works as expected:
+### 이중 표명(Double assertion)
 
-```ts
-function handler (event: Event) {
-    let mouseEvent = event as MouseEvent;
-}
-```
-
-However, the following is most likely an error and TypeScript will complain as shown despite the user's type assertion:
+앞서 살펴봤듯이 타입 표명에는 다소 위험성이 있지만 \*완전히 해로운" 것만은 아닙니다. 예를 들어, 다음은 아주 정당한 사용 사례이며 (즉, 사용자가 전달된 이벤트에 대해 좀더 명확한 정보를 알고 있음) 타입 표명 구문이 의도한대로 동작합니다.
 
 ```ts
 function handler(event: Event) {
-    let element = event as HTMLElement; // Error: Neither 'Event' nor type 'HTMLElement' is assignable to the other
+  let mouseEvent = event as MouseEvent;
 }
 ```
 
-If you *still want that Type, you can use a double assertion*, but first asserting to `unknown` (or `any`) which is compatible with all types and therefore the compiler no longer complains:
+하지만, 아래는 오류일 가능성이 높으며 사용자가 타입 표명을 하더라도 TypeScript는 아래 보이는 것처럼 불평할 것입니다:
 
 ```ts
 function handler(event: Event) {
-    let element = event as unknown as HTMLElement; // Okay!
+  let element = event as HTMLElement; /// Error: Neither 'Event' nor type 'HTMLElement' is assignable to the other
 }
 ```
 
-#### How TypeScript determines if a single assertion is not enough
-Basically, the assertion from type `S` to `T` succeeds if either `S` is a subtype of `T` or `T` is a subtype of `S`. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use `unknown` (or `any`) to be that unsafe.
+그래도 _여전히 그 타입을 사용하고 싶다면 이중 표명을 사용할 수 있습니다_, 먼저 모든 타입과 호환되는 `unknown` (또는 `any`)로 타입 표명을 하면 컴파일러가 더이상 불평하지 않습니다:
 
-#### `as any as` vs `as unknown as`
-Both are *equally unsafe* as far as TypeScript is concerned. Use what makes you happy. Considerations: 
+```ts
+function handler(event: Event) {
+  let element = event as any as HTMLElement; // 오케이!
+}
+```
 
-* Linters prefer `unknown` (with `no-explicit-any` rule)
-* `any` is less characters to type than `unknown`
+#### TypeScript가 단일 타입 표명으로 충분하지 않음을 판단하는 방법
+
+기본적으로 `S` 타입이 `T` 타입의 하위 타입이거나 `T`가 `S`의 하위 타입이면 `S`에서 `T`로의 타입 표명이 성공합니다. 이것은 타입 표명을 사용할 때 추가적인 안전을 제공합니다 ... 완전히 무작위적인 타입 표명은 아주 위험할 수 있고 그 정도로 위험한 일을 하려면 `unknown` (또는 `any`)를 사용해야 합니다.
