@@ -46,7 +46,7 @@
 * [포르투갈](https://github.com/overlineink/typescript-book)
 * [일본](https://github.com/yohamta/typescript-book)
 * [스페인](https://github.com/melissarofman/typescript-book)
-* [한국](https://github.com/radlohead/typescript-book)
+* [한국](https://github.com/sonseong10/typescript-book)
 * [프랑스](https://github.com/HachemiH/typescript-book)
 * [폴란드](https://github.com/mbiesiad/typescript-book/tree/pl_PL)
 * [태국](https://github.com/futurouz/typescript-book)
